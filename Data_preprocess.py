@@ -1,12 +1,21 @@
-from GoogleNews import GoogleNews
+import pandas as pd
+import numpy as np
+from pandas_datareader import data
+from sklearn import svm
+from sklearn import model_selection
+import datetime
 
 
-googlenews = GoogleNews()
-googlenews = GoogleNews(lang='en')
-googlenews = GoogleNews(start='02/28/2020', end='02/28/2020')
-googlenews = GoogleNews(encode='utf-8')
-googlenews.get_news('IBM')
-titles = googlenews.get_texts()
+#  Read data
+
+start_date = datetime.datetime(2018, 1, 1)
+end_date = datetime.datetime(2020, 12, 31)
+df = data.DataReader('^GSPC', 'yahoo', start_date, end_date)
+df.to_csv('SP500.csv', sep=',', header=True, index=True)
+stock = data.DataReader('AAPL', 'yahoo', start_date, end_date)
+stock.to_csv('AAPL.csv', sep=',', header=True, index=True)
+
+
 
 
 
