@@ -67,3 +67,5 @@ clf.fit(x_train, y_train)
 # Result
 print(clf.score(x_train, y_train))  # 精度
 print(clf.score(x_test, y_test))
+# 0.7466666666666667
+# 0.6888888888888889
