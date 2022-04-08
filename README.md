@@ -1,4 +1,8 @@
 # Assignment2
 
-stop word list reference: https://github.com/stopwords-iso/stopwords-iso
-positive negative words list: https://github.com/abdulfatir/twitter-sentiment-analysis
+# Introduction
+
+refer to 'Stock Price Prediction Using Support Vector Machine Approach'
+You can access this document through https://www.dpublication.com/wp-content/uploads/2019/11/24-ME.pdf
+
+# Back-test performance

@@ -6,8 +6,8 @@ from sklearn import model_selection
 
 def target_data(d, m):
     y = []
-    for i in range(m, d.shape[0]):
-        if d.iloc[i, -1] > d.iloc[i-m, -1]:
+    for i in range(d.shape[0]-m):
+        if d.iloc[i, -1] < d.iloc[i+m, -1]:
             y.append(1)
         else:
             y.append(-1)
@@ -16,7 +16,8 @@ def target_data(d, m):
 
 # Hyperparameter
 N1 = 5
-N2 = 5
+N2 = 20
+max_N = max(N1, N2)
 M = 5
 
 #  Preprocess data
@@ -50,21 +51,21 @@ def momentum(price, n):
     return index
 
 
-y = target_data(stock_data, M).iloc[1:, :]
+# Preprocess data
+y = target_data(stock_data, M).iloc[max_N:, :]
 df1 = price_volatility(stock_price, N1)
 df2 = momentum(stock_price, N1)
 df3 = price_volatility(index_price, N2)
 df4 = momentum(index_price, N2)
 x = pd.concat([df1, df2, df3, df4], axis=1)
-x = x.iloc[:-1, :]
+x = x.dropna(axis=0)
+x = x.iloc[:-M, :]
 x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, random_state=1, train_size=0.7)
 
 # Model
 # clf = svm.SVC(C=0.1, kernel='linear', decision_function_shape='ovr')
 clf = svm.SVC(C=0.8, kernel='rbf', gamma=20, decision_function_shape='ovr')
 clf.fit(x_train, y_train)
-
-# Result
 print(clf.score(x_train, y_train))  # 精度
 print(clf.score(x_test, y_test))
 # 0.7466666666666667
