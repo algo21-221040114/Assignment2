@@ -14,11 +14,12 @@ def target_data(d, m):
     y = pd.DataFrame(y)
     return y
 
+
 # Hyperparameter
-N1 = 5
-N2 = 20
+N1 = 10
+N2 = 10
 max_N = max(N1, N2)
-M = 5
+M = 10
 
 #  Preprocess data
 index_data = pd.read_csv('./SP500.csv', index_col='Date')
@@ -64,9 +65,15 @@ x_train, x_test, y_train, y_test = model_selection.train_test_split(x, y, random
 
 # Model
 # clf = svm.SVC(C=0.1, kernel='linear', decision_function_shape='ovr')
-clf = svm.SVC(C=0.8, kernel='rbf', gamma=20, decision_function_shape='ovr')
-clf.fit(x_train, y_train)
-print(clf.score(x_train, y_train))  # 精度
-print(clf.score(x_test, y_test))
-# 0.7466666666666667
-# 0.6888888888888889
+# clf = svm.SVC(C=0.8, kernel='rbf', gamma=20, decision_function_shape='ovr')
+# clf.fit(x_train, y_train)
+# print(clf.score(x_train, y_train))
+# print(clf.score(x_test, y_test))
+
+
+data_label = target_data(stock_price, M)
+data_label.index = stock_price.index[:-M]
+df = pd.concat([stock_data, data_label], axis=1)
+df = df.dropna(axis=0)
+df = df.rename(columns={0: 'Predicted'})
+df.to_csv('./test.csv', sep=',', header=True, index=True)

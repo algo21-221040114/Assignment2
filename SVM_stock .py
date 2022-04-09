@@ -28,7 +28,7 @@ clf = svm.SVC(C=0.8, kernel='rbf', gamma=20, decision_function_shape='ovr')
 clf.fit(x_train, y_train)
 
 # Result
-print(clf.score(x_train, y_train))  # 精度
+print(clf.score(x_train, y_train))
 y_hat = clf.predict(x_train)
 print(clf.score(x_test, y_test))
 y_hat = clf.predict(x_test)
