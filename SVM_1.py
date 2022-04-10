@@ -3,6 +3,10 @@ import numpy as np
 from sklearn import svm
 from sklearn import model_selection
 
+# The following model is conducted only with stock data,
+# providing a poor performance in prediction.
+# So, this model is only for tested, not contained in main part.
+
 
 def target_data(d):
     y = []
@@ -32,10 +36,4 @@ print(clf.score(x_train, y_train))
 y_hat = clf.predict(x_train)
 print(clf.score(x_test, y_test))
 y_hat = clf.predict(x_test)
-# only with stock data,
-# rbf
-# 0.5562913907284768
-# 0.5440528634361234
-# linear
-# 0.5279091769157994
-# 0.5440528634361234
+

@@ -1,25 +1,12 @@
-import pandas as pd
-import numpy as np
 from pandas_datareader import data
-from sklearn import svm
-from sklearn import model_selection
-import datetime
+from datetime import datetime
 
 
 #  Read data
+def read_data(stock_name, start, end, file_name):
+    df = data.DataReader(stock_name, 'yahoo', start, end)
+    df.to_csv(file_name, sep=',', header=True, index=True)
 
-start_date = datetime.datetime(2015, 1, 1)
-end_date = datetime.datetime(2020, 12, 31)
-
-# index indicator
-
-df = data.DataReader('^GSPC', 'yahoo', start_date, end_date)
-df.to_csv('SP500.csv', sep=',', header=True, index=True)
-
-# stock indicator
-
-stock = data.DataReader('AAPL', 'yahoo', start_date, end_date)
-stock.to_csv('AAPL.csv', sep=',', header=True, index=True)
 
 
 
